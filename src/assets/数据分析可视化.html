@@ -1,0 +1,425 @@
+<html>
+<head>
+<meta charset = "utf-8">
+<script src="echarts.min.js"></script>
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+	background-color:#E0FFFF;
+}
+header{
+	height:60px;
+	background-color:#E0FFFF;
+	background-color:rgba(0,0,0,0.1);
+
+}
+
+header	h1{
+		font-size:30px;
+		color:black;		
+		line-height:20px;	
+		padding-top:20px;
+
+}
+
+section{
+	display:flex;
+	padding:10px;
+}
+
+section:nth-child(1) .colume{
+	flex:3;
+}
+section:nth-child(2) .colume{
+	flex:5;
+}
+section:nth-child(3) .colume{
+	flex:3;
+}
+
+.panel{
+		height:600px;
+		width:400px;
+		border-style:outset;
+		background-color:white;
+		background-color:rgba(0,0,0,0.05);
+		padding:10px;
+		margin-bottom:15px;
+		margin-left:30px;
+		margin-right:30px
+		
+}
+
+.panel #charts1{
+		height:580px;
+		width:380px;
+		background-color:white;
+}
+
+.panel #charts2{
+		height:280px;
+		width:380px;
+		background-color:white;
+}
+
+
+.panel2{
+		height:300px;
+		width:400px;
+		border-style:outset;
+		background-color:white;
+		background-color:rgba(0,0,0,0.05);
+		padding:10px;
+		margin-bottom:15px;
+		margin-left:30px;
+		margin-right:30px
+		
+}
+
+.panel2 #charts3{
+		height:280px;
+		width:380px;
+		background-color:white;
+}
+
+.panel2 #charts4{
+		height:280px;
+		width:380px;
+		background-color:white;
+}
+
+
+#nobuttom{
+	width:560px;
+	height:100px;
+	margin:auto;
+	display:flex;
+	text-align:center;
+	font-family:Fantasy;
+}
+
+#nobuttom:nth-child(1) span{
+	flex:1;	
+}
+
+#nobuttom:nth-child(2) span{
+	flex:1;
+}
+
+span{
+	margin-left:15px;
+	padding:15px;
+	background-color:#FFF8DC;
+}
+
+span p{
+    font-size:20px;
+}
+
+span div{
+    font-size:50px;
+}
+
+
+#notop{
+	width:560px;
+	height:500px;
+	margin:auto;
+	margin-bottom:10px;
+}
+#Second{
+width:600px;
+height:400px;
+}
+</style>
+<title>
+基于COCO数据集的数据分析可视化
+</title>
+</head>
+<body>
+<script src="flexible.js"></script>
+<!--head-box-->
+<header>
+<h1 style = "text-align:center">基于COCO数据集的数据分析可视化</h1>
+</header>
+
+<!--页面主体部分-->
+
+<section class = "mainbox">
+	<!--左边-->
+	<div class = "colume" style = "height:100% width=100%">  
+		<div class = "panel">
+		<div id ="charts1"></div>
+		</div>
+	</div>
+	
+	<!--中间-->
+	<div class = "colume" >
+		<div id = "notop"></div>
+		<div id = "nobuttom">
+			<span>
+			<p>汉教词表词语总数</p>
+			<div style = "padding:15px"><h1>11344</h1></div>
+			</span>
+			<span>
+			<p>COCO可解释汉教词词语数</p>
+			<div style = "padding:15px"><h1>6704</h1></div>
+			</span>
+		</div>
+	</div>
+	
+	<!--右边-->
+	<div class = "colume">
+		<div class = "panel2">
+		<div id ="charts3"></div>
+		</div>
+		<div class = "panel2">
+		<div id ="charts4"></div>
+		</div>	
+	</div>
+</section>
+
+
+<script type = "text/javascript">
+var secondChart = echarts.init(document.getElementById('charts3'));
+var secondOption = {
+		title: {
+			text: 'COCO可解释汉教词词语类型占比',
+			x:'center',
+			y:'10px'
+		},			
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'vertical',
+			left: 'left',
+			top:'50px'
+		},
+		series : [
+                {
+					center: ['60%', '60%'],
+                    name: '词性',					
+                    type: 'pie',    // 设置图表类型为饼图
+                    radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                    data:[          // 数据数组，name 为数据项名称，value 为数据项值
+                        {value:3047, name:'名词'},
+                        {value:2081, name:'动词'},
+                        {value:905, name:'形容词'},
+                        {value:243, name:'副词'},
+                        {value:118, name:'量词'}
+                    ]
+                }
+        ],
+		emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+        }
+		
+}
+secondChart.setOption(secondOption)
+
+</script>
+
+
+<script>
+var ThirdChart = echarts.init(document.getElementById('notop'));
+
+var ThirdOption = {
+    title:{
+       text:'COCO数据集各词性可图解汉教词各等级数量',
+       x:'center',
+       textStyle: {
+        fontSize: 20,
+        fontWeight: 'bolder',
+        color: '#483D8B'                             // 主标题文字颜色
+    }
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // Use axis to trigger tooltip
+            type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+        }
+    },
+    legend: {
+        y:'35px',
+        data: ['等级一', '等级二', '等级三', '等级四']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value'
+    },
+    yAxis: {
+        type: 'category',
+        data: ['量词', '副词', '形容词', '动词', '名词']
+    },
+    series: [
+        {
+            name: '等级一',
+            type: 'bar',
+            stack: 'total',
+            label: {
+                show: true
+            },
+            emphasis: {
+                focus: 'series'
+            },
+            data: [68, 127, 238, 525, 890]
+        },
+        {
+            name: '等级二',
+            type: 'bar',
+            stack: 'total',
+            label: {
+                show: true
+            },
+            emphasis: {
+                focus: 'series'
+            },
+            data: [35, 74, 295, 731, 1062]
+        },
+        {
+            name: '等级三',
+            type: 'bar',
+            stack: 'total',
+            label: {
+                show: true
+            },
+            emphasis: {
+                focus: 'series'
+            },
+            data: [14, 39, 316, 704, 928]
+        },
+        {
+            name: '等级四',
+            type: 'bar',
+            stack: 'total',
+            label: {
+                show: true
+            },
+            emphasis: {
+                focus: 'series'
+            },
+            data: [1, 3, 56, 120, 167]
+        }
+    ]
+}
+ThirdChart.setOption(ThirdOption)
+</script>
+
+<script>
+var FirstChart = echarts.init(document.getElementById('charts1'));
+
+var FirstOption = {
+    tooltip: {},
+    title:{
+        text:'COCO可图解汉语等级词表各类词性占比',
+        x:'center',
+        y:'30',
+        textStyle: {
+        fontSize: 15,
+        fontWeight: 'bolder',
+        color: '#483D8B'                             // 主标题文字颜色
+    }
+    },
+    series: [{
+        type: 'pie',
+        radius: '20%',
+        center: ['50%', '20%'],
+        data:[{value:3047, name:'COCO可图解名词数'},
+              {value:1465, name:'未能图解词表名词数'},],
+    }, {
+        type: 'pie',
+        radius: '20%',
+        center: ['50%', '37%'],
+        data:[{value:2081, name:'COCO可图解动词数'},
+              {value:1341, name:'未能图解词表动词数'},]
+        
+    }, 
+     {
+        type: 'pie',
+        radius: '20%',
+        center: ['50%', '54%'],
+        data:[{value:905, name:'COCO可图解形容词数'},
+              {value:484, name:'未能图解词表形容词数'},]
+        
+    },
+    {
+        type: 'pie',
+        radius: '20%',
+        center: ['50%', '71%'],
+        data:[{value:243, name:'COCO可图解副词数'},
+              {value:196, name:'未能图解词表副词数'},]
+        
+    }, {
+        type: 'pie',
+        radius: '20%',
+        center: ['50%', '88%'],
+        data:[{value:118, name:'COCO可图解量词数'},
+              {value:22, name:'未能图解词表量词数'},]
+    }]
+}
+
+FirstChart.setOption(FirstOption)
+</script>
+
+<script>
+var FourthChart = echarts.init(document.getElementById('charts4'));
+
+var FourthOption = {
+    title: {
+        text: '汉语等级词表各等级词语数',
+		x:'center',
+		y:'10px'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    radar: [
+        {
+            indicator: [
+                {text: '等级一', max: 100},
+                {text: '等级二', max: 100},
+                {text: '等级三', max: 100},
+                {text: '等级四', max: 100}
+            ],
+            center: ['50%', '55%'],
+            radius: 80
+        },
+    ],
+    series: [
+        {
+            type: 'radar',
+            tooltip: {
+                trigger: 'item'
+            },
+            areaStyle: {},
+            data: [
+                {
+                    value: [60, 73, 85, 40],
+                    name: '等级'
+                }
+            ]
+        }
+    ]
+}
+
+FourthChart.setOption(FourthOption)
+</script>
+
+</body>
+
+</html>
