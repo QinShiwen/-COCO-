@@ -1,27 +1,20 @@
 # picforword
 > 此作品通过对COCO的数据文件进行分析、总结、建立句子难度模型，最终形成一个以COCO数据为基础的用图片、句子和相应的图片标注区域来解释汉语基础词语的工具。汉语学习者可以用此系统搜索词语，输出与词语相关的句子、图片与之相应的图片标注区域。
 > 汉语学习者可清晰地理解汉语词的意思与使用以及汉语词之间的关系。
+
+>前端：Vue3；后端：Python Flask
+
+>2020年着手项目时最初无框架搭建系统，后来为了减少对DOM文档的操作则在2022年升级使用Vue3搭建
+
 体验地址：http://qinsw666.top/picforword/picforword.html
+COCO数据集官网：https://cocodataset.org/
+数据来源：COCO数据集官网中的JSON数据
 
-## Project setup
-```
-npm install
-```
+## 技术难点实现
+1. 对COCO超过60万的图片英文注释进行汉化与分词，通过计算这些词语在汉语等级词表的覆盖率证实了COCO数据集可解释大部份汉语词，在此基础上建立了句子复杂度线性模型筛选出可解释词语的句子。最终建立出词语与相关句子和图片间的索引，以及图片与类别和图片标注间的索引。
+2. 实现了搜图显示词语，句子，图片以及图片标注的功能(当鼠标指向句子中加粗的词语时利用canvas显示图片标注)，相比于单纯的翻译更有助于汉语学习者理解词语和句子。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 项目不足
+1. 未实现模糊检索
+2. 清洗数据后选择的数据量不够大
+3. 平台为Web1.0版本，功能过少，以及缺乏用户间的交互
