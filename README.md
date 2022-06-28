@@ -7,7 +7,9 @@
 >2020年着手项目时最初无框架搭建系统，后来为了减少对DOM文档的操作则在2022年升级使用Vue3搭建
 
 体验地址：http://qinsw666.top/picforword/picforword.html
+
 COCO数据集官网：https://cocodataset.org/
+
 数据来源：COCO数据集官网中的JSON数据
 
 ## 技术难点实现
